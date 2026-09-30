@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Latihan Aplikasi Flutter")),ter
+            child: Text("Latihan Aplikasi Flutter")),
           backgroundColor: Colors.lightBlueAccent,
           foregroundColor: Colors.white,
         ),
