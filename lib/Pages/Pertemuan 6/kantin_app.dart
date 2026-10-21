@@ -115,15 +115,203 @@ class KantinApp extends StatelessWidget {
       body: ListView(
         children: [
           _banner(),
+          SizedBox(height: 20,),
+          _informasi(),
+          SizedBox(height: 20,),
+          // test grid view
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount
+              (
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 15,
+                childAspectRatio: 0.8
+              ),
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return Container (
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.yellow,
+                  ),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 220,
+                            width: double.infinity,
+                            child: Image.network(
+                              product['image'],
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: 15,
+                        left: 15,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            "⭐ ${product['rating']}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 95,
+                        right: 15,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            product['available'] == true ? 'Tersedia' : 'Habis',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
         ],
       )
+    );
+  }
+
+  Padding _informasi() {
+    return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12
+          ),
+          child: Row(
+            spacing: 8,
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 100,
+                  decoration: BoxDecoration(
+                    border: BoxBorder.all(color: Colors.grey.shade400),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      Container(
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(
+                          color: Colors.orange.withAlpha(135),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.delivery_dining_rounded, 
+                          color: Colors.white
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Gratis ongkir",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text("Minimal pembelian Rp 30.000",
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey.shade500,
+                            ),
+                          ), 
+                        ],
+                      ),
+                    ],
+                  )
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 100,
+                  decoration: BoxDecoration(
+                    border: BoxBorder.all(color: Colors.grey.shade400),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      Container(
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(
+                          color: Colors.orange.withAlpha(135),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.access_time_rounded, 
+                          color: Colors.white
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Buka hari ini",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text("08.00 - 17.00",
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey.shade500,
+                            ),
+                          ), 
+                        ],
+                      ),
+                    ],
+                  )
+                ),
+              ),
+            ],
+          ),
     );
   }
 
   Container _banner() {
     return Container(
           height: 210,
-          margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+          margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
@@ -149,8 +337,8 @@ class KantinApp extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      Colors.black.withOpacity(0.75),
-                      Colors.black.withOpacity(0.1),
+                      Colors.black.withValues(alpha: 0.75),
+                      Colors.black.withValues(alpha: 0.1),
                     ],
                   ),
                 ),
