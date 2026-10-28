@@ -33,7 +33,7 @@ class Flex2 extends StatelessWidget {
                 bottom: -50,
                 right: -50,
                 child: Container(
-                  width: 150,
+                  width: 1500,
                   height: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(75),
